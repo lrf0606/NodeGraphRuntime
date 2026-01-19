@@ -1,0 +1,69 @@
+{
+  "Nodes": [
+    {
+      "UUID": "c48e06b0-90cf-473c-aca6-3827f8bf21ab",
+      "NodeClass": "EventNode",
+      "NodeType": "EventNode",
+      "Config": {
+        "EventID": 1,
+        "FlowOut": {}
+      }
+    },
+    {
+      "UUID": "4d6f6b95-c345-40a1-b46e-d9e8c740b34b",
+      "NodeClass": "RandomIntNode",
+      "NodeType": "DataNode",
+      "Config": {
+        "RandomNum": 0
+      }
+    },
+    {
+      "UUID": "a1bc3776-b381-424e-8dea-0bc8d2302f62",
+      "NodeClass": "TestFlowNode",
+      "NodeType": "FlowNode",
+      "Config": {
+        "AInt": 0,
+        "AString": "",
+        "FlowIn": {},
+        "FlowOut": {}
+      }
+    },
+    {
+      "UUID": "ff845c31-48e3-4391-8d6b-443098e100fc",
+      "NodeClass": "TestFlowNode",
+      "NodeType": "FlowNode",
+      "Config": {
+        "AInt": 222,
+        "AString": "",
+        "FlowIn": {},
+        "FlowOut": {}
+      }
+    }
+  ],
+  "Links": [
+    {
+      "FromNode": "c48e06b0-90cf-473c-aca6-3827f8bf21ab",
+      "FromPort": "FlowOut",
+      "ToNode": "a1bc3776-b381-424e-8dea-0bc8d2302f62",
+      "ToPort": "FlowIn"
+    },
+    {
+      "FromNode": "4d6f6b95-c345-40a1-b46e-d9e8c740b34b",
+      "FromPort": "RandomNum",
+      "ToNode": "a1bc3776-b381-424e-8dea-0bc8d2302f62",
+      "ToPort": "AInt"
+    },
+    {
+      "FromNode": "4d6f6b95-c345-40a1-b46e-d9e8c740b34b",
+      "FromPort": "RandomNum",
+      "ToNode": "ff845c31-48e3-4391-8d6b-443098e100fc",
+      "ToPort": "AInt"
+    },
+    {
+      "FromNode": "a1bc3776-b381-424e-8dea-0bc8d2302f62",
+      "FromPort": "FlowOut",
+      "ToNode": "ff845c31-48e3-4391-8d6b-443098e100fc",
+      "ToPort": "FlowIn"
+    }
+  ]
+}
