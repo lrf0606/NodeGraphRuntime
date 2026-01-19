@@ -53,7 +53,9 @@ namespace NodeGraphFrame.Editor
                     NodeClass = node.GetType().Name,
                     NodeType = node is EventNode ? "EventNode" :
                            node is FlowNode ? "FlowNode" :
-                           node is DataNode ? "DataNode" : "Unknown",
+                           node is DataNode ? "DataNode" :
+                           node is LogicNode ? "LogicNode" :
+                           "Unknown",
                 };
 
                 // EventNode 特殊处理 EventID

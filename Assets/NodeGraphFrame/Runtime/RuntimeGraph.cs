@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 
 namespace NodeGraphFrame.Runtime
@@ -24,8 +25,12 @@ namespace NodeGraphFrame.Runtime
             foreach(var nodeData in graphData.Nodes)
             {
                 var node = CreateRuntimeNode(nodeData);
+                if (node == null)
+                {
+                    Debug.Log($"RuntimeGraph创建节点{nodeData.NodeClass}为空，请检查是否在CreateRuntimeNode中注册");
+                    continue;
+                }
                 node.UUID = nodeData.UUID;
-                node.Config = nodeData.Config;
                 m_AllNodes[node.UUID] = node;
                 BulidPortBindings(node);
                 if (nodeData.NodeClass == "EventNode")
@@ -71,10 +76,14 @@ namespace NodeGraphFrame.Runtime
             return data.NodeClass switch
             {
                 "EventNode" => new EventNode(),
+                "IfNode" => new IfNode(),
+                "ForLoopNode" => new ForLoopNode(),
+                "LogNode" => new LogNode(),
                 "RandomIntNode" => new RandomIntNode(),
                 "TestFlowNode" => new TestFlowNode(),
                 _ => null,
             };
+
         }
 
         public void RunGraph(int eventId, object userData = null)
@@ -88,6 +97,7 @@ namespace NodeGraphFrame.Runtime
             var context = new RuntimeContext();
             context.EventID = eventId;
             context.UserData = userData;
+
             var executed = new HashSet<string>();
             ExecuteNode(eventNode, context, executed);
         }
@@ -105,10 +115,10 @@ namespace NodeGraphFrame.Runtime
             // 1.先去执行之前的数据依赖
             ExecuteDataDependencies(currentNode, context, executed);
             // 2.执行当前节点
-            currentNode.Execute(context);
-            executed.Add(currentNode.UUID);
+            ExecuteCrrent(currentNode, context, executed);
             // 3.流程推进
-            ExecuteNextFlow(currentNode, context, executed);
+            var nextNode = currentNode.GetNextExecuteNode(this);
+            ExecuteNode(nextNode, context, executed);
         }
 
         private void ExecuteDataDependencies(RuntimeNode currentNode, RuntimeContext context, HashSet<string> executed)
@@ -129,24 +139,25 @@ namespace NodeGraphFrame.Runtime
                 inBind.Setter(currentNode, value);
             }
         }
-        private void ExecuteNextFlow(RuntimeNode currentNode, RuntimeContext context, HashSet<string> executed)
+
+        private void ExecuteCrrent(RuntimeNode currentNode, RuntimeContext context, HashSet<string> executed)
         {
-  
-            foreach(var linkData in currentNode.OutputLinks)
-            {
-                if (!IsFlowPort(linkData.FromPort))
-                {
-                    continue;
-                }
-                var nextNode = m_AllNodes[linkData.ToNode];
-                ExecuteNode(nextNode, context, executed);
-                break; // 规定一个线性主流程，不允许一个流程端口连接其他多个流程端口
-            }
+            currentNode.Execute(context);
+            executed.Add(currentNode.UUID);
         }
 
         public bool IsFlowPort(string port)
         {
             return port == "FlowIn" || port == "FlowOut";
+        }
+
+        public RuntimeNode GetNode(string nodeUUID)
+        {
+            if (m_AllNodes.TryGetValue(nodeUUID, out var node))
+            {
+                return node;
+            }
+            return null;
         }
     }
 }

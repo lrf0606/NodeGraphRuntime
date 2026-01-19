@@ -21,3 +21,10 @@ public abstract class DataNode : Node
 {
 }
 
+/// <summary>
+/// 逻辑节点
+/// </summary>
+public abstract class LogicNode : Node
+{
+}
+
