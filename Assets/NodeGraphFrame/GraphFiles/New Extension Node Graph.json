@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "c2407d8e-75ac-409a-9cc6-1c9c775950ee",
+      "nodeType": "EventNode",
+      "type": "EventNode",
+      "config": {
+        "eventID": 1,
+        "flowOut": {}
+      }
+    },
+    {
+      "id": "920146a7-636b-456f-bc37-44f5fab255f0",
+      "nodeType": "MultiplyToStringNode",
+      "type": "FlowNode",
+      "config": {
+        "inputValue": 0,
+        "outputValue": "",
+        "flowIn": {},
+        "flowOut": {},
+        "dataInputs": {},
+        "dataOutputs": {}
+      }
+    }
+  ],
+  "links": [
+    {
+      "fromNode": "c2407d8e-75ac-409a-9cc6-1c9c775950ee",
+      "fromPort": "flowOut",
+      "toNode": "920146a7-636b-456f-bc37-44f5fab255f0",
+      "toPort": "flowIn"
+    },
+    {
+      "fromNode": "920146a7-636b-456f-bc37-44f5fab255f0",
+      "fromPort": "flowIn",
+      "toNode": "c2407d8e-75ac-409a-9cc6-1c9c775950ee",
+      "toPort": "flowOut"
+    }
+  ],
+  "eventIndex": {
+    "1": "c2407d8e-75ac-409a-9cc6-1c9c775950ee"
+  }
+}
