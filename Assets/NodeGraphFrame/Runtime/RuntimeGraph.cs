@@ -1,9 +1,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 
 namespace NodeGraphFrame.Runtime
@@ -31,13 +29,20 @@ namespace NodeGraphFrame.Runtime
                     continue;
                 }
                 node.UUID = nodeData.UUID;
-                m_AllNodes[node.UUID] = node;
-                BulidPortBindings(node);
-                if (nodeData.NodeClass == "EventNode")
+                // 节点属性初始化
+                foreach (var kv in nodeData.Config)
+                {
+                    if (node.InputBindings.TryGetValue(kv.Key, out var setter))
+                    {
+                        setter.Invoke(kv.Value);
+                    }
+                }
+                if (nodeData.NodeType == "EventNode")
                 {
                     int eventId = Convert.ToInt32(nodeData.Config["EventID"]);
                     m_EventNodes[eventId] = node;
                 }
+                m_AllNodes[node.UUID] = node;
             }
             // 2.连线
             foreach(var linkData in graphData.Links)
@@ -47,28 +52,6 @@ namespace NodeGraphFrame.Runtime
                 fromNode.OutputLinks.Add(linkData);
                 toNode.InputLinks.Add(linkData);
             }
-        }
-
-        /// <summary>
-        /// 反射 + 委托缓存实现RuntimeNode的设置数据
-        /// </summary>
-        /// <param name="node"></param>
-        private void BulidPortBindings(RuntimeNode node)
-        {
-            var type = node.GetType();
-            var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            foreach(var field in fields)
-            {
-                var name = field.Name;
-                node.InputBindings[name] = new PortBinding()
-                {
-                    Setter = (n, v) => field.SetValue(n, v)
-                };
-                node.OutputBindings[name] = new PortBinding()
-                {
-                    Getter = (n) => field.GetValue(n)
-                };
-            };
         }
 
         private RuntimeNode CreateRuntimeNode(NodeData data)
@@ -90,7 +73,7 @@ namespace NodeGraphFrame.Runtime
         {
             if (!m_EventNodes.TryGetValue(eventId, out var eventNode))
             {
-                Debug.LogWarning($"RunGraph failed, {eventId} is eixst");
+                Debug.LogWarning($"RunGraph failed, eventId:{eventId} is eixst");
                 return;
             }
             Debug.Log($"RunGraph {eventId}");
@@ -135,8 +118,8 @@ namespace NodeGraphFrame.Runtime
                 // 更新数据
                 var outBind = prevNode.OutputBindings[linkData.FromPort];
                 var inBind = currentNode.InputBindings[linkData.ToPort];
-                var value = outBind.Getter(prevNode);
-                inBind.Setter(currentNode, value);
+                var value = outBind.Invoke();
+                inBind.Invoke(value);
             }
         }
 
