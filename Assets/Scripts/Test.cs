@@ -7,7 +7,7 @@ public class Test : MonoBehaviour
     void Start()
     {
         var graph = new RuntimeGraph("Assets/NodeGraphFrame/GraphFiles/New Node Graph Ex.json");
-        graph.RunGraph(1, null);
+        graph.RunGraph(2, null);
     }
 
     // Update is called once per frame

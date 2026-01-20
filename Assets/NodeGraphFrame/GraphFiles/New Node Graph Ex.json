@@ -1,7 +1,7 @@
 {
   "Nodes": [
     {
-      "UUID": "90efde79-25a8-4f2e-89d7-59b08bc5963e",
+      "UUID": "76b915a7-5099-49d6-b558-5b1eb3d5adb6",
       "NodeClass": "EventNode",
       "NodeType": "EventNode",
       "Config": {
@@ -10,17 +10,18 @@
       }
     },
     {
-      "UUID": "102cf7ac-d2ad-4910-aec3-c8c4ba6edf10",
+      "UUID": "8e4606d9-840f-4158-9aa5-0a90b88280c1",
       "NodeClass": "TestFlowNode",
       "NodeType": "FlowNode",
       "Config": {
         "AInt": 0,
+        "AString": "",
         "FlowIn": {},
         "FlowOut": {}
       }
     },
     {
-      "UUID": "2095b34d-e4ee-4f76-a088-f7d19cf9dff9",
+      "UUID": "16cf3805-dbce-4fa3-921e-5d2eb6aa30c7",
       "NodeClass": "RandomIntNode",
       "NodeType": "DataNode",
       "Config": {
@@ -28,25 +29,27 @@
       }
     },
     {
-      "UUID": "360b754f-077f-431e-a145-d77ddbf312cd",
+      "UUID": "805b43df-5bd4-4869-96ba-fa7fb2514e0c",
       "NodeClass": "LogNode",
       "NodeType": "FlowNode",
       "Config": {
+        "LogString": "",
         "FlowIn": {},
         "FlowOut": {}
       }
     },
     {
-      "UUID": "8748f3ff-fb65-4863-bd2a-6ad4c91f2d2e",
+      "UUID": "5f5803cf-3eb8-4c01-b7cd-9f6a2889de6f",
       "NodeClass": "LogNode",
       "NodeType": "FlowNode",
       "Config": {
+        "LogString": "",
         "FlowIn": {},
         "FlowOut": {}
       }
     },
     {
-      "UUID": "07d6a83f-0913-4766-a312-74a9a7247025",
+      "UUID": "0ae0ee41-5d7d-4905-b755-f632cec4f395",
       "NodeClass": "EventNode",
       "NodeType": "EventNode",
       "Config": {
@@ -55,7 +58,7 @@
       }
     },
     {
-      "UUID": "48e6dfd1-4ca0-41c8-90c2-27588134660a",
+      "UUID": "5c16a86f-fd41-4306-a697-2eb7e1b55f8c",
       "NodeClass": "IfNode",
       "NodeType": "LogicNode",
       "Config": {
@@ -66,7 +69,7 @@
       }
     },
     {
-      "UUID": "5ef3c785-23ef-44b2-8f10-1293fcb55f7d",
+      "UUID": "a8236a5b-8e64-47ec-b8b3-0cb28eeb65b6",
       "NodeClass": "LogNode",
       "NodeType": "FlowNode",
       "Config": {
@@ -76,7 +79,7 @@
       }
     },
     {
-      "UUID": "6cf0a7f9-9dda-4ca8-814b-666be400bfcf",
+      "UUID": "a3e86df9-b89f-4f6e-a6e7-92b73f04a3e1",
       "NodeClass": "LogNode",
       "NodeType": "FlowNode",
       "Config": {
@@ -84,61 +87,160 @@
         "FlowIn": {},
         "FlowOut": {}
       }
+    },
+    {
+      "UUID": "37554657-3398-4ba4-a74a-d777684f01e3",
+      "NodeClass": "EventNode",
+      "NodeType": "EventNode",
+      "Config": {
+        "EventID": 2,
+        "FlowOut": {}
+      }
+    },
+    {
+      "UUID": "002f0432-e6b2-4f1d-9dd2-f7995c4fa294",
+      "NodeClass": "ForLoopNode",
+      "NodeType": "LogicNode",
+      "Config": {
+        "FlowIn": {},
+        "Start": 1,
+        "End": 10,
+        "Step": 3,
+        "FlowOut": {},
+        "PerLoopOut": {},
+        "Index": 0
+      }
+    },
+    {
+      "UUID": "ecad93df-cf3c-4514-bb14-bfc66f55dcd8",
+      "NodeClass": "LogNode",
+      "NodeType": "FlowNode",
+      "Config": {
+        "LogString": "For Loop End",
+        "FlowIn": {},
+        "FlowOut": {}
+      }
+    },
+    {
+      "UUID": "faa6f7bd-a307-48b2-b84f-c63249cc70f2",
+      "NodeClass": "LogNode",
+      "NodeType": "FlowNode",
+      "Config": {
+        "LogString": "For Loop 1",
+        "FlowIn": {},
+        "FlowOut": {}
+      }
+    },
+    {
+      "UUID": "6f210e81-abe8-4d1f-95b6-b032d99d4204",
+      "NodeClass": "LogNode",
+      "NodeType": "FlowNode",
+      "Config": {
+        "LogString": "For Loop 2",
+        "FlowIn": {},
+        "FlowOut": {}
+      }
+    },
+    {
+      "UUID": "799d9e80-6c27-4c56-a89f-890bf317108b",
+      "NodeClass": "LogNode",
+      "NodeType": "FlowNode",
+      "Config": {
+        "LogString": "",
+        "FlowIn": {},
+        "FlowOut": {}
+      }
     }
   ],
   "Links": [
     {
-      "FromNode": "90efde79-25a8-4f2e-89d7-59b08bc5963e",
+      "FromNode": "76b915a7-5099-49d6-b558-5b1eb3d5adb6",
       "FromPort": "FlowOut",
-      "ToNode": "102cf7ac-d2ad-4910-aec3-c8c4ba6edf10",
+      "ToNode": "8e4606d9-840f-4158-9aa5-0a90b88280c1",
       "ToPort": "FlowIn"
     },
     {
-      "FromNode": "102cf7ac-d2ad-4910-aec3-c8c4ba6edf10",
+      "FromNode": "8e4606d9-840f-4158-9aa5-0a90b88280c1",
       "FromPort": "AString",
-      "ToNode": "8748f3ff-fb65-4863-bd2a-6ad4c91f2d2e",
+      "ToNode": "5f5803cf-3eb8-4c01-b7cd-9f6a2889de6f",
       "ToPort": "LogString"
     },
     {
-      "FromNode": "102cf7ac-d2ad-4910-aec3-c8c4ba6edf10",
+      "FromNode": "8e4606d9-840f-4158-9aa5-0a90b88280c1",
       "FromPort": "FlowOut",
-      "ToNode": "8748f3ff-fb65-4863-bd2a-6ad4c91f2d2e",
+      "ToNode": "5f5803cf-3eb8-4c01-b7cd-9f6a2889de6f",
       "ToPort": "FlowIn"
     },
     {
-      "FromNode": "2095b34d-e4ee-4f76-a088-f7d19cf9dff9",
+      "FromNode": "16cf3805-dbce-4fa3-921e-5d2eb6aa30c7",
       "FromPort": "RandomNum",
-      "ToNode": "102cf7ac-d2ad-4910-aec3-c8c4ba6edf10",
+      "ToNode": "8e4606d9-840f-4158-9aa5-0a90b88280c1",
       "ToPort": "AInt"
     },
     {
-      "FromNode": "2095b34d-e4ee-4f76-a088-f7d19cf9dff9",
+      "FromNode": "16cf3805-dbce-4fa3-921e-5d2eb6aa30c7",
       "FromPort": "RandomNum",
-      "ToNode": "360b754f-077f-431e-a145-d77ddbf312cd",
+      "ToNode": "805b43df-5bd4-4869-96ba-fa7fb2514e0c",
       "ToPort": "LogString"
     },
     {
-      "FromNode": "8748f3ff-fb65-4863-bd2a-6ad4c91f2d2e",
+      "FromNode": "5f5803cf-3eb8-4c01-b7cd-9f6a2889de6f",
       "FromPort": "FlowOut",
-      "ToNode": "360b754f-077f-431e-a145-d77ddbf312cd",
+      "ToNode": "805b43df-5bd4-4869-96ba-fa7fb2514e0c",
       "ToPort": "FlowIn"
     },
     {
-      "FromNode": "07d6a83f-0913-4766-a312-74a9a7247025",
+      "FromNode": "0ae0ee41-5d7d-4905-b755-f632cec4f395",
       "FromPort": "FlowOut",
-      "ToNode": "48e6dfd1-4ca0-41c8-90c2-27588134660a",
+      "ToNode": "5c16a86f-fd41-4306-a697-2eb7e1b55f8c",
       "ToPort": "FlowIn"
     },
     {
-      "FromNode": "48e6dfd1-4ca0-41c8-90c2-27588134660a",
+      "FromNode": "5c16a86f-fd41-4306-a697-2eb7e1b55f8c",
       "FromPort": "TrueOut",
-      "ToNode": "5ef3c785-23ef-44b2-8f10-1293fcb55f7d",
+      "ToNode": "a8236a5b-8e64-47ec-b8b3-0cb28eeb65b6",
       "ToPort": "FlowIn"
     },
     {
-      "FromNode": "48e6dfd1-4ca0-41c8-90c2-27588134660a",
+      "FromNode": "5c16a86f-fd41-4306-a697-2eb7e1b55f8c",
       "FromPort": "FalseOut",
-      "ToNode": "6cf0a7f9-9dda-4ca8-814b-666be400bfcf",
+      "ToNode": "a3e86df9-b89f-4f6e-a6e7-92b73f04a3e1",
+      "ToPort": "FlowIn"
+    },
+    {
+      "FromNode": "37554657-3398-4ba4-a74a-d777684f01e3",
+      "FromPort": "FlowOut",
+      "ToNode": "002f0432-e6b2-4f1d-9dd2-f7995c4fa294",
+      "ToPort": "FlowIn"
+    },
+    {
+      "FromNode": "002f0432-e6b2-4f1d-9dd2-f7995c4fa294",
+      "FromPort": "FlowOut",
+      "ToNode": "ecad93df-cf3c-4514-bb14-bfc66f55dcd8",
+      "ToPort": "FlowIn"
+    },
+    {
+      "FromNode": "002f0432-e6b2-4f1d-9dd2-f7995c4fa294",
+      "FromPort": "PerLoopOut",
+      "ToNode": "faa6f7bd-a307-48b2-b84f-c63249cc70f2",
+      "ToPort": "FlowIn"
+    },
+    {
+      "FromNode": "002f0432-e6b2-4f1d-9dd2-f7995c4fa294",
+      "FromPort": "Index",
+      "ToNode": "799d9e80-6c27-4c56-a89f-890bf317108b",
+      "ToPort": "LogString"
+    },
+    {
+      "FromNode": "faa6f7bd-a307-48b2-b84f-c63249cc70f2",
+      "FromPort": "FlowOut",
+      "ToNode": "6f210e81-abe8-4d1f-95b6-b032d99d4204",
+      "ToPort": "FlowIn"
+    },
+    {
+      "FromNode": "6f210e81-abe8-4d1f-95b6-b032d99d4204",
+      "FromPort": "FlowOut",
+      "ToNode": "799d9e80-6c27-4c56-a89f-890bf317108b",
       "ToPort": "FlowIn"
     }
   ]

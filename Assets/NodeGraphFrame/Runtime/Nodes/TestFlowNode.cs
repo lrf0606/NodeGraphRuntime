@@ -1,12 +1,13 @@
 // USER LOGIC FILE - SAFE TO EDIT
 
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NodeGraphFrame.Runtime
 {
     public class TestFlowNode : TestFlowNodeBase
     {
-        public override void Execute(RuntimeContext context)
+        public override void Execute(RuntimeGraph graph, RuntimeContext context, HashSet<string> executed)
         {
             // TODO: Implement logic
             AString = $"==={AInt}===";

@@ -85,7 +85,7 @@ namespace NodeGraphFrame.Runtime
             ExecuteNode(eventNode, context, executed);
         }
 
-        private void ExecuteNode(RuntimeNode currentNode, RuntimeContext context, HashSet<string> executed)
+        public void ExecuteNode(RuntimeNode currentNode, RuntimeContext context, HashSet<string> executed)
         {
             if (currentNode == null)
             {
@@ -125,8 +125,8 @@ namespace NodeGraphFrame.Runtime
 
         private void ExecuteCrrent(RuntimeNode currentNode, RuntimeContext context, HashSet<string> executed)
         {
-            currentNode.Execute(context);
             executed.Add(currentNode.UUID);
+            currentNode.Execute(this, context, executed);
         }
 
         public bool IsFlowPort(string port)

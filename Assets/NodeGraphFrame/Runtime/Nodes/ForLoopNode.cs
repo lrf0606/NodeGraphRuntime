@@ -1,47 +1,28 @@
 // USER LOGIC FILE - SAFE TO EDIT
-
-using UnityEngine;
+using System.Collections.Generic;
 
 namespace NodeGraphFrame.Runtime
 {
     public class ForLoopNode : ForLoopNodeBase
     {
-        private int current;
-        private bool initialized;
-        public override void Execute(RuntimeContext context)
+        public override void Execute(RuntimeGraph graph, RuntimeContext context, HashSet<string> executed)
         {
-            // 第一次进入 for 时初始化
-            if (!initialized)
+            var preLoopNode = graph.GetNode(OutputLinks[1].ToNode);
+            var saveExecuted = new HashSet<string>(executed);
+            for (int i = Start; i <= End; i += Step)
             {
-                initialized = true;
-                current = Start;
+                Index = i;
+                executed.IntersectWith(saveExecuted);
+                graph.ExecuteNode(preLoopNode, context, executed);
             }
-
-            // 设置当前 index（供数据端口使用）
-            Index = current;
+            
         }
 
         public override RuntimeNode GetNextExecuteNode(RuntimeGraph graph)
         {
-            var loopEndNode = graph.GetNode(OutputLinks[0].ToNode);
-            var perLoopNode = graph.GetNode(OutputLinks[1].ToNode);
-            // 判断是否还能继续循环
-            bool canContinue = Step > 0 ? current < End : Step < 0 ? current > End : false;
-            if (canContinue && perLoopNode != null)
-            {
-                current += Step;
-                return perLoopNode;
-            }
-            // 循环结束，重置状态
-            ResetLoopState();
-            return loopEndNode;
+            return graph.GetNode(OutputLinks[0].ToNode);
         }
 
-        private void ResetLoopState()
-        {
-            initialized = false;
-            current = 0;
-            Index = 0;
-        }
+ 
     }
 }

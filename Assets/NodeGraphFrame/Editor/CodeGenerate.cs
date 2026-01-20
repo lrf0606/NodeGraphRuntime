@@ -165,7 +165,7 @@ namespace NodeGraphFrame.Editor
             sb.AppendLine("{");
             sb.AppendLine($"    public class {node.ClassName} : {node.ClassName}Base");
             sb.AppendLine("    {");
-            sb.AppendLine("        public override void Execute(RuntimeContext context)");
+            sb.AppendLine("        public override void Execute(RuntimeGraph graph, RuntimeContext context, HashSet<string> executed)");
             sb.AppendLine("        {");
             sb.AppendLine("            // Implement logic here");
             sb.AppendLine("        }");

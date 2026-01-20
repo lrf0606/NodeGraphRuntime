@@ -22,7 +22,11 @@ namespace NodeGraphFrame.Editor
 
             if (outIsFlow || inIsFlow)
             {
+                // 输入只能和输出连
                 if (!(outIsFlow && inIsFlow)) return false;
+
+                // Flow 单主干 禁止一个流程端口多个连线
+                if (from.IsConnected || to.IsConnected) return false;
 
                 // EventNode 不能作为流程输入
                 if (to.node is EventNode) return false;
@@ -30,8 +34,7 @@ namespace NodeGraphFrame.Editor
                 // DataNode 不参与 Flow
                 if (from.node is DataNode || to.node is DataNode) return false;
 
-                // Flow 单主干
-                if (from.IsConnected) return false;
+               
             }
 
             // DataPort 输入时只能连1个 输出时不限制

@@ -20,7 +20,7 @@ namespace NodeGraphFrame.Runtime
         protected void RegisterOutput(string name, Func<object> getter) => m_OutputBindings[name] = getter;
         protected abstract void RegisterPorts();
         // 子类实现Execute逻辑
-        public abstract void Execute(RuntimeContext context);
+        public abstract void Execute(RuntimeGraph graph, RuntimeContext context, HashSet<string> executed);
 
         public RuntimeNode()
         {
